@@ -25,3 +25,4 @@ yarn-error.log*
 # sql
 connect url.txt
 create two blogs.sql
+new table.sql

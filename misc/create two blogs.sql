@@ -1,2 +1,0 @@
-insert into blogs (author, url, title) values ('Dan Abramov', 'www.fi', 'Writing Resilient Components');
-insert into blogs (author, url, title) values ('Martin Fowler', 'www.google.fi', 'Is High Quality Software Worth the Cost?');

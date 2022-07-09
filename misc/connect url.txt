@@ -1,0 +1,9 @@
+DATABASE_URL: postgres://ylityqrbaacwun:90f793b3217382ef3e29eac10f56859306eda6c925c2bf005ea9008b1d389e3d@ec2-44-195-162-77.compute-1.amazonaws.com:5432/d11dlccopoeat8
+username: ylityqrbaacwun
+password: 90f793b3217382ef3e29eac10f56859306eda6c925c2bf005ea9008b1d389e3d
+url: ec2-44-195-162-77.compute-1.amazonaws.com
+dbname: d11dlccopoeat8
+port: 5432
+
+---
+heroku run psql -h ec2-44-195-162-77.compute-1.amazonaws.com -p 5432 -U ylityqrbaacwun d11dlccopoeat8

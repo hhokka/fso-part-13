@@ -1,0 +1,25 @@
+{
+  "name": "fso-part-13",
+  "version": "1.0.0",
+  "description": "Full Stack Open Course, Part 13",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hhokka/fso-part-13.git"
+  },
+  "author": "Hans Hokka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hhokka/fso-part-13/issues"
+  },
+  "homepage": "https://github.com/hhokka/fso-part-13#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "pg": "^8.7.3",
+    "sequelize": "^6.21.2"
+  }
+}

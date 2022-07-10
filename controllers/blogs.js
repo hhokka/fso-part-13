@@ -38,7 +38,7 @@ router.delete('/:id', noteFinder, async (req, res) => {
 
 router.put('/:id', noteFinder, async (req, res) => {
     if (req.blog) {
-        req.blog.important = req.body.important
+        req.blog.likes = req.body.likes
         await req.blog.save()
         res.json(req.blog)
     } else {

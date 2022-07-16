@@ -64,18 +64,6 @@ const noteFinder = async (req, res, next) => {
     req.blog = await Blog.findByPk(req.params.id)
     next()
 }
-/* 
-router.get('/:id', async (req, res, next) => {
-    const blog = await Blog.findByPk(req.params.id)
-    if (req.blog) {
-        res.json(blog)
-    } else {
-        console.log('get:id here');
-        next(res.status)
-        res.status(404).end()
-    }
-})
- */
 
 router.get('/:id', (request, response, next) => {
     Blog.findByPk(request.params.id)
@@ -93,12 +81,38 @@ router.get('/:id', (request, response, next) => {
         })
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', tokenExtractor, async (req, res, next) => {
+    const usernameFromToken = req.decodedToken.username
+    const userIdFromToken = req.decodedToken.id
+    //console.log('usernameFromToken: ', req.decodedToken.username);
+    //console.log('token: ', req.decodedToken)
     const blog = await Blog.findByPk(req.params.id)
-    if (blog) {
+    const userIdFromBlog = blog.dataValues.userId
+    //console.log('userIdFromBlog: ', userIdFromBlog)
+    //const userIdFromToken = req.decodedToken.id
+    //console.log('userIdFromToken: ', req.decodedToken.id);
+    //console.log('blog: ', blog)
+    //const user = await User.findAll()
+    const user = await User.findOne({
+        where: {
+            username: usernameFromToken
+        }
+    })
+    console.log('user: ', user)
+    console.log('blog: ', blog)
+    console.log('decodedToken: ', req.decodedToken)
+    console.log('userIdFromToken: ', user)
+    console.log('');
+    console.log('user.username: ', user.username)
+    console.log('req.decodedToken.id: ', req.decodedToken.id)
+    console.log('blog.dataValues.userId: ', blog.dataValues.userId);
+
+    if (req.decodedToken.id === blog.dataValues.userId) {
+        console.log('await blog.destroy()')
         await blog.destroy()
     }
     res.status(204).end()
+
 })
 
 router.put('/:id', async (req, res, next) => {

@@ -1,6 +1,7 @@
 const router = require('express').Router()
 require('express-async-errors')
 const jwt = require('jsonwebtoken')
+const { Op } = require('sequelize')
 
 const { Blog, User } = require('../models')
 const { SECRET } = require('../util/config')
@@ -10,14 +11,45 @@ const { SECRET } = require('../util/config')
     res.json(blogs)
 })
  */
-router.get('/', async (req, res) => {
+/* router.get('/', async (req, res) => {
+    const where = {}
+    console.log('req.query.search');
+    if (req.query.search) {
+        where.content = {
+            [Op.substring]: req.query.search
+        }
+    }
+
     const blogs = await Blog.findAll({
         attributes: { exclude: ['userId'] },
         include: {
             model: User,
             attributes: ['name', 'username']
-        }
+        },
+        where
     })
+    res.json(blogs)
+}) */
+
+router.get('/', async (req, res) => {
+    console.log('req.query.search: ', req.query.search);
+    const where = {}
+
+    if (req.query.search) {
+        where.title = {
+            [Op.substring]: req.query.search
+        }
+    }
+
+    const blogs = await Blog.findAll({
+        attributes: { exclude: ['userId'] },
+        include: {
+            model: User,
+            attributes: ['name']
+        },
+        where
+    })
+
     res.json(blogs)
 })
 
@@ -66,6 +98,13 @@ const noteFinder = async (req, res, next) => {
 }
 
 router.get('/:id', (request, response, next) => {
+    const searchString = ''
+    if (request.params.id === '?search=') {
+        searchString = req.params.id.split('=')
+        searchString = searchString[1]
+        console.log('search string: ', seachString);
+    }
+    console.log('params: ', request.params);
     Blog.findByPk(request.params.id)
         .then(blog => {
             if (blog) {

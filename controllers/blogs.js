@@ -39,6 +39,9 @@ router.get('/', async (req, res) => {
         where.title = {
             [Op.substring]: req.query.search
         }
+        where.author = {
+            [Op.substring]: req.query.search
+        }
     }
 
     const blogs = await Blog.findAll({

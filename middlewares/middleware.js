@@ -39,6 +39,12 @@ const errorHandler = (error, request, response, next) => {
             error: 'Validation isEmail on username failed'
         })
     }
+    if (error.name === 'SequelizeDatabaseError') {
+        return response.status(400).send({
+            error: 'Error in query'
+        })
+    }
+
 
     //logger.error(error.message)
 

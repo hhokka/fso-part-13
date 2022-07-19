@@ -102,13 +102,6 @@ const noteFinder = async (req, res, next) => {
 }
 
 router.get('/:id', (request, response, next) => {
-    const searchString = ''
-    if (request.params.id === '?search=') {
-        searchString = req.params.id.split('=')
-        searchString = searchString[1]
-        console.log('search string: ', seachString);
-    }
-    console.log('params: ', request.params);
     Blog.findByPk(request.params.id)
         .then(blog => {
             if (blog) {
